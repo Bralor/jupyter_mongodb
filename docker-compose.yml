@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  mongodb:
+    container_name: "default_mongodb"
+    image: mongo:latest
+    env_file:
+      - config/mongodb.env
+    ports:
+      - 27017:27017
+    volumes:
+      - /jupyter_mongo:/data/db
