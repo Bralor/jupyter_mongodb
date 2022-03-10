@@ -1,12 +1,27 @@
 version: "3.7"
 
 services:
+  jupyter:
+    container_name: "default_jupyter"
+    image: jupyter/datascience-notebook:python-3.8.6
+    restart: "always"
+    ports:
+      - 8888:8888
+    env_file:
+      - config/jupyter.env
+    volumes:
+      - ./:/home/jovyan/work
+
   mongodb:
     container_name: "default_mongodb"
     image: mongo:latest
+    restart: "always"
     env_file:
       - config/mongodb.env
     ports:
       - 27017:27017
     volumes:
-      - /jupyter_mongo:/data/db
+      - shared:/data/db
+
+volumes:
+  shared:
